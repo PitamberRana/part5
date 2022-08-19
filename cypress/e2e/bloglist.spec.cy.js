@@ -87,30 +87,30 @@ describe("Blog app", function () {
         url: "test3",
       });
 
-      cy.contains("test1").parent().parent().as("blog1");
-      cy.contains("test2").parent().parent().as("blog2");
-      cy.contains("test3").parent().parent().as("blog3");
+      cy.contains("test1").parent().as("blog1");
+      cy.contains("test2").parent().as("blog2");
+      cy.contains("test3").parent().as("blog3");
     });
 
     it("they are ordered by number of likes", function () {
       cy.get("@blog1").contains("view").click();
       cy.get("@blog2").contains("view").click();
       cy.get("@blog3").contains("view").click();
-      cy.get("@blog1").contains("like").as("like1");
-      cy.get("@blog2").contains("like").as("like2");
-      cy.get("@blog3").contains("like").as("like3");
+      cy.get("@blog1").contains("like").as("1");
+      cy.get("@blog2").contains("like").as("2");
+      cy.get("@blog3").contains("like").as("3");
 
-      cy.get("@like2").click();
+      cy.get("@2").click();
       cy.wait(500);
-      cy.get("@like1").click();
+      cy.get("@1").click();
       cy.wait(500);
-      cy.get("@like1").click();
+      cy.get("@1").click();
       cy.wait(500);
-      cy.get("@like3").click();
+      cy.get("@3").click();
       cy.wait(500);
-      cy.get("@like3").click();
+      cy.get("@3").click();
       cy.wait(500);
-      cy.get("@like3").click();
+      cy.get("@3").click();
       cy.wait(500);
 
       cy.get(".blog").then((blogs) => {
