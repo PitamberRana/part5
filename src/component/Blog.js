@@ -10,10 +10,23 @@ const Blog = ({ blog, handleUpdateBlog, handleDeleteBlog }) => {
     borderWidth: 1,
     marginBottom: 5,
   };
+
   const showWhenVisible = { display: visible ? "" : "none" };
   const handleVisible = () => setVisible(!visible);
 
   const buttonLabel = visible ? "hide" : "view";
+
+  // const increaseLikes = () => {
+  //   const updatedBlog = {
+  //     ...blog,
+  //     likes: blog.likes + 1,
+  //   };
+  //   handleUpdateBlog(updatedBlog);
+  // };
+  // const increaseLikes = () => {
+  //   const updateblog = { ...blog, likes: blog.likes + 1 };
+  //   handleUpdateBlog(updateblog);
+  // };
 
   return (
     <div style={blogStyle} className="blog">
@@ -29,7 +42,7 @@ const Blog = ({ blog, handleUpdateBlog, handleDeleteBlog }) => {
         <p>{blog.url}</p>
         <p>
           {blog.likes}{" "}
-          <button id="like-btn" onClick={() => handleUpdateBlog(blog.id)}>
+          <button id="like-btn" onClick={() => handleUpdateBlog(blog)}>
             like
           </button>
         </p>

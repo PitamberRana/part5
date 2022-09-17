@@ -43,4 +43,33 @@ describe("Blog component tests", () => {
 
     expect(component.container).toHaveTextContent("7");
   });
+
+  test("checking if like button is clicked twice", () => {
+    const component = render(
+      <Blog
+        blog={blog}
+        updateBlog={mockUpdateBlog}
+        deleteBlog={mockDeleteBlog}
+      />
+    );
+    const button = component.getByText("like");
+    fireEvent.click(button);
+    fireEvent.click(button);
+    expect(component.container).toHaveTextContent("9");
+  });
+
+  // test("Checking if the like button is clicked twice", async () => {
+  //   const mockHandler = jest.fn();
+  //   const component = render(<Blog blog={blog} handleLikeBlog={mockHandler} />);
+
+  //   const user = userEvent.setup();
+  //   const button = screen.getByText("view");
+  //   await user.click(button);
+
+  //   const likebutton = screen.getByText("likes");
+  //   await user.click(likebutton);
+  //   await user.click(likebutton);
+
+  //   expect(mockHandler.mock.calls.length).toBe(2);
+  // });
 });

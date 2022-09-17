@@ -76,19 +76,19 @@ const App = () => {
     setUser(null);
   };
 
-  const handleUpdateBlog = async (id) => {
-    const blog = blogs.find((b) => b.id === id);
-
-    const updateObject = { ...blog, likes: blog.likes + 1 };
-    // console.log(updateObject);
-
+  const handleUpdateBlog = async (blog) => {
     try {
-      const result = await blogService.update(id, updateObject);
-      console.log(result);
+      await blogService.update(blog.id, {
+        title: blog.title,
+        author: blog.author,
+        url: blog.url,
+        likes: blog.likes + 1,
+      });
 
-      setBlogs(blogs.map((blog) => (blog.id === result.id ? result : blog)));
+      const blogs = await blogService.getAll();
+      setBlogs(blogs);
     } catch (exception) {
-      setMsg(`${exception.response.data.error}`);
+      setMsg(`Cannot update blog ${blog.title}`);
     }
   };
 
